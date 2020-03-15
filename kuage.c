@@ -10,7 +10,6 @@
 int main (int arcgc, char **argv);
 int hx711 (int channel);
 
-clockid_t clk_id;
 struct timespec *res;
 
 int main (int arcgc, char **argv)
