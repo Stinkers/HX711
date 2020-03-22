@@ -43,7 +43,7 @@ For each individual HX711 you read out from, there is a hx711 struct which conta
 
 ### Functions
 
-**void hx711_setup(struct hx711 \*channel);** 
+    void hx711_setup(struct hx711 \*channel);
 
 Sets up the instance of **channel** and initialises the chip, setting the mode.
 
@@ -59,7 +59,7 @@ Sets up the instance of **channel** and initialises the chip, setting the mode.
     hx711_setup(&channel_1);
 ```
 
-**int hx711_zero(struct hx711 \*channel, int count);**
+    **int hx711_zero(struct hx711 \*channel, int count);**
 
 Sets the zero value for the HX711 by averaging over **count** samples. The value is stored in the **hx711** structure and returned by the function.
 
@@ -67,4 +67,6 @@ Sets the zero value for the HX711 by averaging over **count** samples. The value
 ```C
     printf("Zero value: %d\n", hx711_zero(&channel_1, 10));
 ```
+
+##    int hx711_read(struct hx711 \*channel);
 
