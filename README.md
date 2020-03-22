@@ -24,4 +24,18 @@ The hx711.h header file contains the constants and structure for each sensor. Th
 
 These are used for all HX711 readings.
 
-To be continued...
+For each individual HX711 you read out from, there is a hx711 struct which contains settings and readings for each HX711. These are:
+
+* int pd_sck : The GPIO number for the clock pin
+* int dout : the GPIO number for the data out pin 
+* enum hx711_mode mode : The mode for the chip -
+  * MODE_B32 : Channel B, gain of 32
+  * MODE_A64 : Channel A, gain of 64
+  * MODE_A128 : Channel A, gain of 128
+* int avgtime : Period in seconds to average over
+* int zero : The zero reading - this is set by calling the hx711_zero function
+* int average : The current averaged reading
+* int last : The last single valid reading
+* int avgcount : For internal use - initialise to 0
+* time_t : For internal use - initialise to 0
+
