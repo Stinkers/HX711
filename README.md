@@ -16,7 +16,6 @@ A real time OS would be preferable to a Linux/Raspberry Pi - something like a PI
 Even so, the occasional wonky reading gets through. Don't use this code in mission critical applications, or at all really. 
 
 ## Using the library
-
 The hx711.h header file contains the constants and structure for each sensor. The constants are:
 
 * **HX711_GLITCHLEVEL** : The threshold for consequetive readings to valid. Default is 200, i.e. the reading is rejected if it is 200 or more higher or lower than the previous one.
@@ -25,7 +24,6 @@ The hx711.h header file contains the constants and structure for each sensor. Th
 These are used for all HX711 readings.
 
 ### struct hx711
-
 For each individual HX711 you read out from, there is a hx711 struct which contains settings and readings for each HX711. These are:
 
 * **int pd_sck** : The GPIO number for the clock pin
@@ -41,9 +39,8 @@ For each individual HX711 you read out from, there is a hx711 struct which conta
 * **int avgcount** : For internal use - initialise to 0
 * **time_t** : For internal use - initialise to 0
 
-### Functions
-
-    void hx711_setup(struct hx711 \*channel);
+## Functions
+**void hx711_setup (struct hx711 \*channel)**
 
 Sets up the instance of **channel** and initialises the chip, setting the mode.
 
@@ -56,17 +53,46 @@ Sets up the instance of **channel** and initialises the chip, setting the mode.
         0, 0, 0, 0, 0   // For internal use
     };
 
-    hx711_setup(&channel_1);
+    hx711_setup (&channel_1);
 ```
 
-    **int hx711_zero(struct hx711 \*channel, int count);**
+**int hx711_zero (struct hx711 \*channel, int count)**
 
 Sets the zero value for the HX711 by averaging over **count** samples. The value is stored in the **hx711** structure and returned by the function.
 
 #### Example
 ```C
-    printf("Zero value: %d\n", hx711_zero(&channel_1, 10));
+    printf ("Zero value: %d\n", hx711_zero (&channel_1, 10));
 ```
 
-##    int hx711_read(struct hx711 \*channel);
+**int hx711_read (struct hx711 \*channel)**
 
+Reads the HX711 associated with the **channel** struct, which it updates with the last valid reading and the averaged reading. Returns 1 for a valid reading or 0 if it could not take a reading.
+
+#### Example
+```C
+    while (!hx711_read(&channel_1));  // Wait for a valid reading
+    printf ("Last reading: %d\n", channel_1.last);
+    printf ("Averaged reading: %d\n", channel_1.average);
+    printf ("Zeroed average: %d\n", channel_1.average - channel_1.zero);
+```
+
+**void hx711_sleep(struct hx711 \*channel)**
+
+Sends the HX711 to sleep. It will be woken up the next time it's read or initialised.
+
+#### Example
+```C
+    hx711_sleep (&channel_1);
+```
+## rpio.c / rpio.h
+These contain functions and macros for use with the library. The only one you need to use is:
+
+**void setup_io ()**
+
+This sets up memory mapping for GPIO and interrupts. It only needs to be called once in your program, regardless of how many HX711s you are controlling.
+
+#### Example
+```C
+    setup_io(); // Well duh.
+```
