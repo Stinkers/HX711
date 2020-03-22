@@ -48,7 +48,7 @@ For each individual HX711 you read out from, there is a hx711 struct which conta
 Sets up the instance of **channel** and initialises the chip, setting the mode.
 
 #### Example
-
+```C
     struct hx711 channel_1 = {
         3, 15,      // pd_sck on GPIO 3, dout on GPIO 15
         MODE_A128,  // channel and gain mode
@@ -57,4 +57,14 @@ Sets up the instance of **channel** and initialises the chip, setting the mode.
     };
 
     hx711_setup(&channel_1);
+```
+
+**int hx711_zero(struct hx711 \*channel, int count);**
+
+Sets the zero value for the HX711 by averaging over **count** samples. The value is stored in the **hx711** structure and returned by the function.
+
+#### Example
+```C
+    printf("Zero value: %d\n", hx711_zero(&channel_1, 10));
+```
 
