@@ -43,7 +43,7 @@ For each individual HX711 you read out from, there is a hx711 struct which conta
 
 ### Functions
 
-**void hx711_setup(struct hx711 *channel);** 
+**void hx711_setup(struct hx711 \*channel);** 
 
 Sets up the instance of **channel** and initialises the chip, setting the mode.
 
