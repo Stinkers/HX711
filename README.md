@@ -96,3 +96,9 @@ This sets up memory mapping for GPIO and interrupts. It only needs to be called 
 ```C
     setup_io(); // Well duh.
 ```
+
+## kuage.c / kuage.h
+An example program showing how to use the library. It's called **kuage** because it's the start of a program to read out the beer level in a keg, using an HX711 and 4 load sensors. It's a gauge for my keg, so a kuage. I think of the worst names.
+
+## Makefile
+`make clean` to clean things up, `make` to compile kuage.

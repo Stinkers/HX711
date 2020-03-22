@@ -4,13 +4,9 @@
 #include <unistd.h>
 #include "rpio.h"
 #include "hx711.h"
-#define FALSE 0
-#define TRUE 1
 
 int main (int arcgc, char **argv);
 int hx711 (int channel);
-
-struct timespec *res;
 
 int main (int arcgc, char **argv)
 {
