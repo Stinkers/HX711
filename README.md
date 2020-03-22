@@ -13,7 +13,9 @@ A real time OS would be preferable to a Linux/Raspberry Pi - something like a PI
 * Turning off most interrupts in the readout loop.
 * Averaging the readings over a period of time.
 
-Even so, the occasional wonky reading gets through. Don't use this code in mission critical applications, or at all really. 
+Even so, the occasional wonky reading gets through. Don't use this code in mission critical applications, or at all. 
+
+Used with load sensors, the output from the HX711 is very noisy and drifts all over the place. This can be improved by taking multiple readings and averaging them. Averaging is done over a number of seconds using a simple rolling average. The longer the average time the smoother the readings, but the slower the response to changes. It is better to read often and keep the average time as low as possible whilst getting nice readings. To reset the rolling average, set the averaging time to 0 and call the read function. 
 
 ## Using the library
 The hx711.h header file contains the constants and structure for each sensor. The constants are:
@@ -32,7 +34,7 @@ For each individual HX711 you read out from, there is a hx711 struct which conta
   * MODE_B32 : Channel B, gain of 32
   * MODE_A64 : Channel A, gain of 64
   * MODE_A128 : Channel A, gain of 128
-* **int avgtime** : Period in seconds to average over
+* **int avgtime** : Period in seconds to average over. 
 * **int zero** : The zero reading - this is set by calling the hx711_zero function
 * **int average** : The current averaged reading
 * **int last** : The last single valid reading
