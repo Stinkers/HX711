@@ -14,7 +14,7 @@ int main (int arcgc, char **argv)
     
     struct hx711 channel1 = 
     {
-        3, 15,      // pd_sck, dout GPIO pins
+        14, 15,      // pd_sck, dout GPIO pins
         MODE_A128,  // channel and gain mode
         10,          // Average over x seconds of samples
         0, 0, 0, 0, 0   // Ballast

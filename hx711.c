@@ -91,7 +91,6 @@ int hx711_read(struct hx711 *channel)
         for (int i = 0; i < channel->mode; i++){
             GPIO_SET = 1<<channel->pd_sck;
             GPIO_CLR = 1<<channel->pd_sck;
-            delaya++;
             bitset = GET_GPIO(channel->dout)>>channel->dout;
             if (i < 24) {
                 readvalue = readvalue<<1;
